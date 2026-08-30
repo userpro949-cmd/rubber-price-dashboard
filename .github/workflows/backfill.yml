@@ -1,0 +1,39 @@
+name: Backfill Historical Prices
+
+on:
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  backfill:
+    runs-on: ubuntu-latest
+    timeout-minutes: 300
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install tesseract
+        run: sudo apt-get update && sudo apt-get install -y tesseract-ocr
+
+      - name: Install Python deps
+        run: pip install -r requirements.txt
+
+      - name: Run backfill
+        run: python scripts/backfill.py
+
+      - name: Commit and push results
+        run: |
+          git config user.name "rubber-price-bot"
+          git config user.email "actions@github.com"
+          git add docs/data/
+          if git diff --cached --quiet; then
+            echo "No changes to commit."
+          else
+            git commit -m "Backfill historical rubber prices"
+            git push
+          fi
