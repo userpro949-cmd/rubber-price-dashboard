@@ -5,11 +5,15 @@
       "source_image": "docs/data/images/2026-08-25.jpg",
       "source_page": "https://www.rrisl.gov.lk/price_e.php?last=3",
       "grades": {
-        "7 36000": 945.0,
-        "7 835.00": 230.0,
-        "lots": 190.0
+        "LATEX CREPE 1": 1150.0,
+        "LATEX CREPE 2": 1050.0,
+        "LATEX CREPE 3": 945.0,
+        "LATEX CREPE 4": 930.0,
+        "SC.CR.": 905.0,
+        "SC.CR. 3X(BR)": 916.0,
+        "FLAT BARK": 890.0
       },
-      "raw_ocr_text": "RUBBER AUCTION PRICES - SALE OF 25.08.2026\n\nLATeEXcREPE 1x\nLATEXCREPE 1\nLATEXCREPE 2\nLATEXCREPE 3\nLATEXCREPE 4\nsco. xen)\nsco. 2x{eR)\nsco. 3x(eR)\nsco, ‘ax(er)\nFLAT BARK\n\nSKIN CREPE\n\nRIBBED SMOKED SHEET\nIBRED SMOKED SHEET\nRIBBED SMOKED SHEET\nRIBBED SMOKED SHEET\n\nRIBBED SMOKED SHEET\n\ncree\nSCOR\n\nRss\n\nUng\n\n41380.00\n\n4000.00\n935.00\n20.00\n\n91500\n300.00\n80.00\n905.00\n1386.00\n82.00\n\nUna\nUna\nUna\noa\n\n68,475 kgs\n8.325 ks\n5.500 kegs\n\nOks\n\nRANGE (Rs AVERAGE,\n\nRs)\n- Ung ‘ung\n= Fat 1150.00\n= 4,100.00 44.950.00\n7 36000 945.00\n= $9000 93000\n_ $20.00 918.00\n> sin00 905.00\n7 81800 91600\n= ‘Nom 905.00\n7 835.00 230.00\n~ 335.00 252.00\n- Ung Ung\n: Ung Ung\nz Ung Ung\n= Ung Ung\n: Une Ung\n\nlots 190\nots 0\n",
+      "raw_ocr_text": "RUBBER AUCTION PRICES - SALE OF 25.08.2026\nRANGE (Rs.} AVERAGE\n{Rs.)\nLATEX CREPE 1x Unq _ Unq Unq\nLATEX CREPE 1 1,150.00 . Flat 1,150.00\nLATEX CREPE 2 1,000.00 _ 1,200.00 1,050.00\nLATEX CREPE 3 935.00 - 960.00 945.00\nLATEX CREPE 4 920.00 _ 940.00 930.00\nSC.CR. 2X{BR) 915.00 _ 920.00 918.00\nSC.CR. 2x{BR) 900.00 _ 920.00 905.00\nSC.CR. 3X(BR) 890.00 _ 918,00 916.00\nSC.CR. 4x{BR) 905.00 . Nom 905.00\nFLAT BARK 886.00 _ 895.00 890.00\nSKOM CREPE 892.00 . 895.00 893.00\nRIBBED SMOKED SHEET 1 Ung _ Unq Ung\nRIBBED SMOKED SHEET 2 Ung _ Ung Unq\nRIBBED SMOKED SHEET 3 Ung _ Unq Unq\nRIBBED SMOKED SHEET 4 unq _ Ung Ung\nRIBBED SMOKED SHEET 5 Ung _ Ung Ung\nCREPE 68,475 kes\nSOR 8,325 kes lots 190\nSKIM 6,500 kes\nRSS Okgs lots 0\n",
       "needs_review": false
     }
   ]
