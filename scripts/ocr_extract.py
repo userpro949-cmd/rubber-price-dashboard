@@ -15,17 +15,24 @@ The RRISL sheet is a table like:
   RIBBED SMOKED SHEET  1  Unq       - Unq          Unq
 
 There's also a faint tree-shaped watermark behind the text, which hurts
-OCR accuracy. We upscale + threshold the image before running tesseract
-to cut through that.
+OCR accuracy. Sheets from different years also use slightly different
+fonts/scan quality, so raw OCR output for the same grade varies
+("LATEX CREPE 1X" vs "LATEXCREPE 1X" vs "LATEX CREPE 41x" etc).
 
-Image OCR on a scanned table is still not perfectly reliable, so:
+To keep the data usable across ~8 years of scans:
 - the full raw OCR text is always saved (for manual double-checking)
-- we take the AVERAGE (Rs.) column (rightmost number) per grade as "the
-  price" for charting purposes
+- every parsed row label is snapped to one of a fixed, known set of real
+  grade names (CANONICAL_GRADES) via fuzzy matching; anything that
+  doesn't resemble a real grade closely enough is dropped rather than
+  creating a new noisy "grade"
+- parsed prices are sanity-bounded (real per-kg rubber prices are in the
+  hundreds/low thousands of Rs, not tens of thousands) to reject cases
+  where a volume figure like "68,475 kgs" gets misread as a price
 - rows where the average is "Unq" / "Flat" / "Nom" (no trade / no quote
   that week) are simply skipped for that week, not treated as errors
 - `needs_review` is set if we parsed a suspiciously small number of rows
 """
+import difflib
 import json
 import re
 import sys
@@ -44,16 +51,48 @@ LABEL_RE = re.compile(
 VARIANT_RE = re.compile(r"^[0-9]{1,2}[A-Za-z()]*$")
 NUMBER_RE = re.compile(r"^[\d,]+(\.\d+)?$")
 
+CANONICAL_GRADES = [
+    "LATEX CREPE 1X", "LATEX CREPE 1", "LATEX CREPE 2",
+    "LATEX CREPE 3", "LATEX CREPE 4",
+    "SC.CR 1X(BR)", "SC.CR 2X(BR)", "SC.CR 3X(BR)", "SC.CR 4X(BR)",
+    "FLAT BARK", "SKIM CREPE",
+    "RIBBED SMOKED SHEET 1", "RIBBED SMOKED SHEET 2",
+    "RIBBED SMOKED SHEET 3", "RIBBED SMOKED SHEET 4",
+    "RIBBED SMOKED SHEET 5",
+]
+
+MIN_PLAUSIBLE_PRICE = 50
+MAX_PLAUSIBLE_PRICE = 3000
+
+MATCH_THRESHOLD = 0.72
+
+
+def _normalize_for_match(label: str) -> str:
+    return re.sub(r"[^A-Z0-9]", "", label.upper())
+
+
+_CANONICAL_NORMALIZED = {g: _normalize_for_match(g) for g in CANONICAL_GRADES}
+
+
+def canonicalize_label(raw_label: str):
+    norm = _normalize_for_match(raw_label)
+    if not norm:
+        return None
+    best_grade, best_ratio = None, 0.0
+    for grade, grade_norm in _CANONICAL_NORMALIZED.items():
+        ratio = difflib.SequenceMatcher(None, norm, grade_norm).ratio()
+        if ratio > best_ratio:
+            best_grade, best_ratio = grade, ratio
+    if best_ratio >= MATCH_THRESHOLD:
+        return best_grade
+    return None
+
 
 def is_variant_token(tok: str) -> bool:
-    """A grade-number token like '1', '2', '1X', '3X(BR)' — short, and
-    never carrying a comma/decimal the way a formatted price does."""
     return bool(VARIANT_RE.match(tok)) and "." not in tok and "," not in tok
 
 
 def preprocess(image: Image.Image) -> Image.Image:
-    """Upscale + grayscale + threshold to cut through the background
-    watermark and sharpen thin table text for OCR."""
     image = image.convert("L")
     w, h = image.size
     image = image.resize((w * 2, h * 2), Image.LANCZOS)
@@ -69,7 +108,6 @@ def parse_grades(raw_text):
         if not line:
             continue
         if "kgs" in line.lower() or "lots" in line.lower():
-            # bottom-of-sheet volume/lot-count summary rows, not price rows
             continue
         m = LABEL_RE.match(line)
         if not m:
@@ -85,6 +123,10 @@ def parse_grades(raw_text):
             variant = tokens[0]
             idx = 1
 
+        base_norm = _normalize_for_match(base_label)
+        if not variant and base_norm not in ("FLATBARK", "SKIMCREPE"):
+            continue
+
         value_tokens = [t for t in tokens[idx:] if t not in ("-", "\u2013", "\u2014")]
         if not value_tokens:
             continue
@@ -97,8 +139,15 @@ def parse_grades(raw_text):
         except ValueError:
             continue
 
-        label = f"{base_label} {variant}".strip()
-        grades[label] = price
+        if not (MIN_PLAUSIBLE_PRICE <= price <= MAX_PLAUSIBLE_PRICE):
+            continue
+
+        raw_label = f"{base_label} {variant}".strip()
+        canonical = canonicalize_label(raw_label)
+        if canonical is None:
+            continue
+
+        grades[canonical] = price
     return grades
 
 
