@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Sri Lanka Rubber Auction Prices</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+<style>
+  :root {
+    --bg: #0f1512;
+    --panel: #161f1a;
+    --border: #263229;
+    --text: #e8efe9;
+    --muted: #8fa596;
+    --accent: #4caf7d;
+    --warn: #d9a441;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    padding: 24px 16px 60px;
+  }
+  .wrap { max-width: 980px; margin: 0 auto; }
+  h1 { font-size: 1.5rem; margin-bottom: 4px; }
+  .sub { color: var(--muted); font-size: 0.9rem; margin-bottom: 24px; }
+  .panel {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px;
+    margin-bottom: 20px;
+  }
+  .controls { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
+  .chip {
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--text);
+    padding: 6px 12px;
+    border-radius: 999px;
+    font-size: 0.85rem;
+    cursor: pointer;
+  }
+  .chip.active { background: var(--accent); border-color: var(--accent); color: #06140c; }
+  table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+  th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--border); }
+  th { color: var(--muted); font-weight: 600; }
+  .review-tag {
+    display: inline-block;
+    font-size: 0.72rem;
+    background: var(--warn);
+    color: #241a03;
+    padding: 2px 8px;
+    border-radius: 999px;
+    margin-left: 8px;
+  }
+  .empty { color: var(--muted); padding: 20px 4px; }
+  .source-link { color: var(--accent); }
+  canvas { max-height: 380px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Sri Lanka Rubber Auction Prices</h1>
+  <div class="sub">
+    Source: <a class="source-link" href="https://www.rrisl.gov.lk/price_e.php?last=3" target="_blank">Rubber Research Institute of Sri Lanka</a>
+    — updates automatically after each auction
+  </div>
+
+  <div class="panel">
+    <div class="controls" id="gradeChips"></div>
+    <canvas id="priceChart"></canvas>
+  </div>
+
+  <div class="panel">
+    <h2 style="margin-top:0; font-size:1.1rem;">Latest auction</h2>
+    <div id="latestTable"></div>
+  </div>
+
+  <div class="panel">
+    <h2 style="margin-top:0; font-size:1.1rem;">All auctions</h2>
+    <div id="historyTable"></div>
+  </div>
+</div>
+
+<script>
+async function loadData() {
+  const res = await fetch('data/prices.json', { cache: 'no-store' });
+  return res.json();
+}
+
+function collectGrades(entries) {
+  const grades = new Set();
+  entries.forEach(e => Object.keys(e.grades || {}).forEach(g => grades.add(g)));
+  return Array.from(grades).sort();
+}
+
+const palette = ['#4caf7d', '#4c8daf', '#af4c7d', '#af8d4c', '#7d4caf', '#4caf4c'];
+
+function renderChart(entries, grades, activeGrades) {
+  const ctx = document.getElementById('priceChart').getContext('2d');
+  const labels = entries.map(e => e.date);
+  const datasets = grades
+    .filter(g => activeGrades.has(g))
+    .map((g, i) => ({
+      label: g,
+      data: entries.map(e => (e.grades && e.grades[g] !== undefined) ? e.grades[g] : null),
+      borderColor: palette[i % palette.length],
+      backgroundColor: palette[i % palette.length],
+      spanGaps: true,
+      tension: 0.25,
+    }));
+
+  if (window._chart) window._chart.destroy();
+  window._chart = new Chart(ctx, {
+    type: 'line',
+    data: { labels, datasets },
+    options: {
+      responsive: true,
+      interaction: { mode: 'index', intersect: false },
+      scales: {
+        x: { ticks: { color: '#8fa596' }, grid: { color: '#263229' } },
+        y: { ticks: { color: '#8fa596' }, grid: { color: '#263229' } },
+      },
+      plugins: {
+        legend: { labels: { color: '#e8efe9' } },
+      },
+    },
+  });
+}
+
+function renderChips(grades, activeGrades, entries) {
+  const el = document.getElementById('gradeChips');
+  el.innerHTML = '';
+  grades.forEach(g => {
+    const btn = document.createElement('button');
+    btn.className = 'chip' + (activeGrades.has(g) ? ' active' : '');
+    btn.textContent = g;
+    btn.onclick = () => {
+      if (activeGrades.has(g)) activeGrades.delete(g); else activeGrades.add(g);
+      renderChips(grades, activeGrades, entries);
+      renderChart(entries, grades, activeGrades);
+    };
+    el.appendChild(btn);
+  });
+}
+
+function renderLatestTable(entry) {
+  const el = document.getElementById('latestTable');
+  if (!entry) { el.innerHTML = '<div class="empty">No auction data yet.</div>'; return; }
+  const rows = Object.entries(entry.grades || {})
+    .map(([g, v]) => `<tr><td>${g}</td><td>${v}</td></tr>`)
+    .join('');
+  const reviewTag = entry.needs_review ? '<span class="review-tag">needs review</span>' : '';
+  el.innerHTML = `
+    <div style="margin-bottom:8px;">Auction date: <strong>${entry.date}</strong>${reviewTag}</div>
+    ${rows ? `<table><thead><tr><th>Grade</th><th>Price</th></tr></thead><tbody>${rows}</tbody></table>`
+           : '<div class="empty">No rows parsed from this week\'s image yet — check the raw scan.</div>'}
+  `;
+}
+
+function renderHistoryTable(entries) {
+  const el = document.getElementById('historyTable');
+  if (!entries.length) { el.innerHTML = '<div class="empty">No auctions recorded yet.</div>'; return; }
+  const rows = [...entries].reverse().map(e => {
+    const reviewTag = e.needs_review ? '<span class="review-tag">needs review</span>' : '';
+    const gradeCount = Object.keys(e.grades || {}).length;
+    return `<tr><td>${e.date}</td><td>${gradeCount} grades parsed${reviewTag}</td></tr>`;
+  }).join('');
+  el.innerHTML = `<table><thead><tr><th>Date</th><th>Status</th></tr></thead><tbody>${rows}</tbody></table>`;
+}
+
+(async function init() {
+  const data = await loadData();
+  const entries = data.entries || [];
+  const grades = collectGrades(entries);
+  const activeGrades = new Set(grades.slice(0, 4)); // show first few by default
+
+  renderChips(grades, activeGrades, entries);
+  renderChart(entries, grades, activeGrades);
+  renderLatestTable(entries[entries.length - 1]);
+  renderHistoryTable(entries);
+})();
+</script>
+</body>
+</html>
