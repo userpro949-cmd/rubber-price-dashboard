@@ -3329,6 +3329,18 @@
       },
       "raw_ocr_text": "RUBBER AUCTION PRICES - SALE OF 25.08.2026\nRANGE (Rs.} AVERAGE\n{Rs.)\nLATEX CREPE 1x Unq _ Unq Unq\nLATEX CREPE 1 1,150.00 . Flat 1,150.00\nLATEX CREPE 2 1,000.00 _ 1,200.00 1,050.00\nLATEX CREPE 3 935.00 - 960.00 945.00\nLATEX CREPE 4 920.00 _ 940.00 930.00\nSC.CR. 2X{BR) 915.00 _ 920.00 918.00\nSC.CR. 2x{BR) 900.00 _ 920.00 905.00\nSC.CR. 3X(BR) 890.00 _ 918,00 916.00\nSC.CR. 4x{BR) 905.00 . Nom 905.00\nFLAT BARK 886.00 _ 895.00 890.00\nSKOM CREPE 892.00 . 895.00 893.00\nRIBBED SMOKED SHEET 1 Ung _ Unq Ung\nRIBBED SMOKED SHEET 2 Ung _ Ung Unq\nRIBBED SMOKED SHEET 3 Ung _ Unq Unq\nRIBBED SMOKED SHEET 4 unq _ Ung Ung\nRIBBED SMOKED SHEET 5 Ung _ Ung Ung\nCREPE 68,475 kes\nSOR 8,325 kes lots 190\nSKIM 6,500 kes\nRSS Okgs lots 0\n",
       "needs_review": false
+    },
+    {
+      "date": "2026-09-01",
+      "source_image": "docs/data/images/2026-09-01.jpg",
+      "source_page": "https://www.rrisl.gov.lk/price_e.php?last=3",
+      "grades": {
+        "LATEX CREPE 2": 1060.0,
+        "SC.CR 2X(BR)": 925.0,
+        "RIBBED SMOKED SHEET 1": 952.0
+      },
+      "raw_ocr_text": "RUBBER AUCTION PRICES - SALE OF 01.09.2026\nRANGE (Rs.) AVERAGE\n(Rs)\nLATEX CREPE 1X Ung _ Unq Ung\nLATEX CREPE 1 Ung . Ung Ung\nLATEX CREPE 2 1,050.00 _ 1,075.00 1,060.00\nLATEX CREPE 3 940.00 - 950.00 ‘945.00\nLATEX CREPE a 930.00 = 940.00 935.00\nSC.CR. 2x(BR) 920.00 _ 930.00 925.00\nSC.CR. 2X{BR) Ung _ Ung Ung\nSC.CR. 3Xx{BR} 920.00 _ 931.00 925.00\nSC.CR. AX{BR} 915.00 7 Nom 915.00\nFLAT BARK Ung _ Unq Urq\nSKGM CREPE 922.00 _ Nom 922.00\nRIBBED SMOKED SHEET 1 952.00 _ Nom 952.00\nPIBBED SMOKED SHEET 2 Unq _ Ung Unq\nRIBBED SMOKED SHEET 3 ung _ Unq Unq\nRIBBED SMOKED SHEET 4 Unq _ Unq Ung\nRIBBED SMOKED SHEET 5 ung _ Ung Unq\nCREPE 58,275 kes\nSCOR 3,875 kes lots 153\nSKIM 14,700 kgs\nRSS 2675 kes lots Ss\n",
+      "needs_review": true
     }
   ]
 }
