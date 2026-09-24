@@ -3355,6 +3355,23 @@
       },
       "raw_ocr_text": "RUBBER AUCTION PRICES - SALE OF 08.09.2026\nRANGE {Rs.} AVERAGE\n{Rs}\nLATEX CREPE Xx Unq _ Ung Ung\nLATEX CREPE 1 1,125.00 . 4,150.00 1,135.00\nLATEX CREPE 2 1,000.00 _ 4,050.00 1,025.00\nLATEX CREPE 3 950.00 ~ 960.00 952.00\nLATEX CREPE 4 931.00 = 950.00 948.00\nSC.CR. 4X(BR} 935.00 _ 945.00 940.00\nSC.CR. 2x{BR) Ung _ Ung Ung\nSC.CR. ax(BR} $925.00 _ Flat 925.00\nSC.CR. AX{BR} Ung _ Ung Urq\nFLAT BARK Ung _ Unq Unq\nSKIM CREPE Unq 7 Unq Ung\nRIBBED SMOKED SHEET 1 960.00 _ 970.00 965.00\nRIBBED SMOKED SHEET 2 Unq _ Ung Unq\nRIBBED SMOKED SHEET 3 Unq _ Ung Unq\nRIBBED SMOKED SHEET 4 Unq _ Ung Ung\nRIBBED SMOKED SHEET 5 Unq _ unq Ung\nCREPE 56,175 kes\nSCR 6,050 kes lots 154\nSKIM 19,050 kgs\nRSS 2,724 kes lots 8\n",
       "needs_review": false
+    },
+    {
+      "date": "2026-09-22",
+      "source_image": "docs/data/images/2026-09-22.jpg",
+      "source_page": "https://www.rrisl.gov.lk/price_e.php?last=3",
+      "grades": {
+        "LATEX CREPE 1": 1175.0,
+        "LATEX CREPE 2": 1073.0,
+        "LATEX CREPE 3": 1055.0,
+        "LATEX CREPE 4": 1053.0,
+        "SC.CR 1X(BR)": 960.0,
+        "SC.CR 3X(BR)": 948.0,
+        "SC.CR 4X(BR)": 945.0,
+        "RIBBED SMOKED SHEET 1": 975.0
+      },
+      "raw_ocr_text": "RUBBER AUCTION PRICES - SALE OF 22.09.2026\nRANGE (Rs.) AVERAGE\n{Rs.)\nLATEX CREPE ix 1,185.00 _ Nom 1,185.00\nLATEX CREPE 1 1,170.00 - 1,185.00 1,175.00\nLATEX CREPE 2 1,070.00 _ 1,075.00 1,073.00\nLATEX CREPE 3 1,030.00 _ 1,070.00 1,055.00\nLATEX CREPE 4 1,040.00 - 1,075.00 1,053.00\nSC.CR. 1X(BR) 950.00 _ 975.00 960.00\nSC.CR. 2x{BR) Unq _ Ung Ung\nSC.CR. 3X(BR) 945.00 _ 950.00 948.00\nSC.CR. 4X(BR) 945.00 - Nom 945.00\nFLAT BARK Ung _ Ung Unq\nSKIM CREPE Unq _ Ung Unq\nRIBBED SMOKED SHEET 1 975.00 _ Nom 975.00\nRIBBED SMOKED SHEET 2 Unq _ Ung Unq\nRIBBED SMOKED SHEET 3 Unq _ Ung Ung\nRIBBED SMOKED SHEET 4 Ung _ Unq Ung\nRIBBED SMOKED SHEET 5 Ung _ Ung Unq\nCREPE 68,375 kgs\nSC.CR 12,650 kes lots 178\nSKIM 19,400 kes |\nR.S.S 3,150 kes lots 3\n",
+      "needs_review": false
     }
   ]
 }
