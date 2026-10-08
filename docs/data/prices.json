@@ -3372,6 +3372,22 @@
       },
       "raw_ocr_text": "RUBBER AUCTION PRICES - SALE OF 22.09.2026\nRANGE (Rs.) AVERAGE\n{Rs.)\nLATEX CREPE ix 1,185.00 _ Nom 1,185.00\nLATEX CREPE 1 1,170.00 - 1,185.00 1,175.00\nLATEX CREPE 2 1,070.00 _ 1,075.00 1,073.00\nLATEX CREPE 3 1,030.00 _ 1,070.00 1,055.00\nLATEX CREPE 4 1,040.00 - 1,075.00 1,053.00\nSC.CR. 1X(BR) 950.00 _ 975.00 960.00\nSC.CR. 2x{BR) Unq _ Ung Ung\nSC.CR. 3X(BR) 945.00 _ 950.00 948.00\nSC.CR. 4X(BR) 945.00 - Nom 945.00\nFLAT BARK Ung _ Ung Unq\nSKIM CREPE Unq _ Ung Unq\nRIBBED SMOKED SHEET 1 975.00 _ Nom 975.00\nRIBBED SMOKED SHEET 2 Unq _ Ung Unq\nRIBBED SMOKED SHEET 3 Unq _ Ung Ung\nRIBBED SMOKED SHEET 4 Ung _ Unq Ung\nRIBBED SMOKED SHEET 5 Ung _ Ung Unq\nCREPE 68,375 kgs\nSC.CR 12,650 kes lots 178\nSKIM 19,400 kes |\nR.S.S 3,150 kes lots 3\n",
       "needs_review": false
+    },
+    {
+      "date": "2026-10-06",
+      "source_image": "docs/data/images/2026-10-06.jpg",
+      "source_page": "https://www.rrisl.gov.lk/price_e.php?last=3",
+      "grades": {
+        "LATEX CREPE 2": 1085.0,
+        "LATEX CREPE 3": 1065.0,
+        "LATEX CREPE 4": 1055.0,
+        "SC.CR 3X(BR)": 926.0,
+        "SC.CR 4X(BR)": 925.0,
+        "FLAT BARK": 925.0,
+        "RIBBED SMOKED SHEET 1": 985.0
+      },
+      "raw_ocr_text": "Public sale of 06/10/26\nRANGE AVERAGE\n\nLATEX CREPE 1X Ung - Ung Ung\nLATEX CREPE 1 Ung - Unq Ung\nLATEX CREPE 2 1,080.00 1,090.00 1,085.00\nLATEX CREPE 3 1,060.00 - 1,080.00 1,065.00\nLATEX CREPE 4 1,040.00 - 1,065.00 1,055.00\nSC.CR. 1X(BR) Ung - Unq Ung\nSC.CR. 2X(BR) Unq - Unq Unq\nSC.CR. 3X(BR) 926.00 - Nom 926.00\nSC.CR. 4X(BR) 925.00 - Nom 925.00\nFLAT BARK 925.00 - Nom 925.00\nSKIM CREPE Ung - Unq Ung\nRIBBED SMOKED SHEET 1 985.00 - Nom 985.00\nRIBBED SMOKED SHEET 2 Ung - Ung Ung\nRIBBED SMOKED SHEET 3 Ung - Unq Unq\nRIBBED SMOKED SHEET 4 Ung - Ung Ung\nRIBBED SMOKED SHEET 5 Ung - Unq Unq\n\nCREPE 30,675 kgs.\n\nSC.CR 7,800 Kgs. lots 111\n\nSKIM 12,800 Kgs.\n\nR.S.S. 1,250 kgs. lots 1\n",
+      "needs_review": false
     }
   ]
 }
